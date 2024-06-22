@@ -1,8 +1,7 @@
-#import streamlit as st
-#from snowflake.snowpark.context import get_active_session
-#from snowflake.snowpark.context import get_active_session
+# Import necessary libraries
+import streamlit as st
+from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
-from snowflake import connector 
 
 # Write directly to the app
 st.title("Customize Your Smoothie :balloon:")
@@ -13,7 +12,7 @@ st.write(
 name_on_order = st.text_input('Name on Smoothie:')
 st.write('The name on your smoothie will be:', name_on_order)
 
-cnx = st.connection('snowflake')
+cnx = st.connection("snowflake")
 session = cnx.session()
 
 # Retrieve fruit options from the Snowflake table
@@ -33,7 +32,7 @@ if ingredients_list and name_on_order:
             # Insert the order into the database using Python's f-string formatting for values
             session.sql(
                 f"""
-                INSERT INTO smoothies.public.orders (name_on_order, ingredients)
+                INSERT INTO <your_schema>.<your_table> (name_on_order, ingredients)
                 VALUES ('{name_on_order}', '{ingredients_string}')
                 """
             ).collect()
