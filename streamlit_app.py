@@ -40,3 +40,7 @@ if ingredients_list and name_on_order:
             st.write('Something went wrong:', e)
 else:
     st.write("Please enter your name and select ingredients.")
+
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response)
